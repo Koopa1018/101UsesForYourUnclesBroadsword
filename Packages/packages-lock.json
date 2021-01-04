@@ -22,13 +22,13 @@
       "hash": "7b9588e3f5a91c4d042f0043ece8743b8384320b"
     },
     "com.clouds.input_base": {
-      "version": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Input Containers#2d8adb9bb44e1722dfdac1c70a73d6025bf438a2",
+      "version": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Input Containers",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.mathematics": "1.0.0"
       },
-      "hash": "2d8adb9bb44e1722dfdac1c70a73d6025bf438a2"
+      "hash": "15144e83855ddc058816b43c06f8bce063fa4571"
     },
     "com.clouds.modular_platformer": {
       "version": "https://github.com/Koopa1018/ModularPlatformer.git",
@@ -42,7 +42,7 @@
         "com.clouds.facing_8way": "0.1.0",
         "com.clouds.physics2d_utils": "0.0.3"
       },
-      "hash": "3a90246f2d0fd452a04bc107c404cad51dba9522"
+      "hash": "425a54e23d6e588cf530d4d85ee1438de45c8b0a"
     },
     "com.clouds.movement_2d": {
       "version": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Movement Components/Movement 2D",
