@@ -15475,7 +15475,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0015c946d93ad934581004a245610bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forcesToApply: {fileID: 0}
   xVelocity: {fileID: 1113215792421582884}
   yVelocity: {fileID: 1005503988044021587}
 --- !u!1 &8730612324058914011
@@ -15491,6 +15490,7 @@ GameObject:
   - component: {fileID: 499120888191634470}
   - component: {fileID: 5194349388129417200}
   - component: {fileID: 1878413281395811911}
+  - component: {fileID: 3114165814510124908}
   m_Layer: 0
   m_Name: Platformer Input Nucleus
   m_TagString: Untagged
@@ -15536,8 +15536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8d2e7a334e7494c836f17ec3403f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAxis: Horizontal
-  jumpAxis: Jump
+  inputMap: {fileID: 0}
+  actionMapName: Platforming
+  walkAction: {fileID: 0}
+  jumpAction: {fileID: 0}
   walkOutput: {fileID: 5194349388129417200}
   jumpOutput: {fileID: 1878413281395811911}
 --- !u!114 &5194349388129417200
@@ -15564,3 +15566,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0832b3d6d45f844b865332ad51cade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3114165814510124908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730612324058914011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Gameplay
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -10,10 +10,13 @@ public class SwordSlash : MonoBehaviour
     public Transform player;
     public float feetOffset = 0.75f;
     public LayerMask layerMask;
+    
+    bool attack = false;
+    
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        
+        attack = Input.GetButtonDown("Slash");
     }
 
     // Update is called once per frame
@@ -26,9 +29,6 @@ public class SwordSlash : MonoBehaviour
         mousePosition -= offsetOrigin;
         Debug.DrawRay(offsetOrigin, mousePosition);
 
-        
-        // click detect
-        bool attack = Input.GetButtonDown("Slash");
         // when click create Hitbox
         if (attack){
             RaycastHit2D swordHit = Physics2D.Raycast(
@@ -46,6 +46,8 @@ public class SwordSlash : MonoBehaviour
             // amount of force from normal
             forceAcceptor.AcceptForce(collideAngle);
             // object responses
+
+            attack = false;
         }
     }
     
