@@ -1,0 +1,15 @@
+position of player
+position of mouse
+time of slash
+
+mouse location relative to player
+click detect
+when click create Hitbox
+hitbox collision check for object component
+check object layer
+check object normal
+amount of force from normal
+object responses
+
+amount of force
+object responses

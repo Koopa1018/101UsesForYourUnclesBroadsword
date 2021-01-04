@@ -2,7 +2,7 @@
   "dependencies": {
     "com.clouds.facing_8way": "https://github.com/Koopa1018/CURGLAFF-BasePackages.git?path=/Facing Direction/Facing Direction 8 Way",
     "com.clouds.facing_base": "https://github.com/Koopa1018/CURGLAFF-BasePackages.git?path=/Facing Direction/Facing Direction Base",
-    "com.clouds.input_base": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Input Containers#2d8adb9bb44e1722dfdac1c70a73d6025bf438a2",
+    "com.clouds.input_base": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Input Containers",
     "com.clouds.modular_platformer": "https://github.com/Koopa1018/ModularPlatformer.git",
     "com.clouds.movement_2d": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Movement Components/Movement 2D",
     "com.clouds.movement_base": "https://github.com/Koopa1018/CURGLAFF-UnityFoundation.git?path=/Movement Components/Movement Base",
