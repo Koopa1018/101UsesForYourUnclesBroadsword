@@ -19,22 +19,26 @@ public class SwordSlash : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 offsetOrigin = player.position + Vector3.up * feetOffset;
+        
         // mouse location relative to player
-        Vector3 mousePosition = new Vector3(
-        Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"), 0    
-        );
-        mousePosition -= player.position;
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition -= offsetOrigin;
+        Debug.DrawRay(offsetOrigin, mousePosition);
+
         
         // click detect
         bool attack = Input.GetButtonDown("Slash");
         // when click create Hitbox
         if (attack){
             RaycastHit2D swordHit = Physics2D.Raycast(
-                player.position + Vector3.up * feetOffset, // origin of the raycast
+                offsetOrigin, // origin of the raycast
                 mousePosition.normalized, // direction of the raycast
                 swordLength, // length of the raycast
                 layerMask
             );
+            Debug.DrawRay(offsetOrigin, Vector3.Normalize(mousePosition) * swordLength, Color.red, 0.5f);
+            
             // hitbox collision check for object component
             // check object normal
             Vector2 collideAngle = swordHit.normal;

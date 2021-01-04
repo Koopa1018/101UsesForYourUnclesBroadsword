@@ -14910,6 +14910,56 @@ Transform:
   m_Father: {fileID: 2216682379115894274}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3922956550516562685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 542016987674358015}
+  - component: {fileID: 7153836495135330910}
+  m_Layer: 0
+  m_Name: Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &542016987674358015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3922956550516562685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2216682379115894274}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7153836495135330910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3922956550516562685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df122356232579944b6d344453918ff4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceAcceptor: {fileID: 8403929893662698024}
+  swordLength: 1.5
+  player: {fileID: 2216682379115894274}
+  feetOffset: 0.75
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &4349888619664719635
 GameObject:
   m_ObjectHideFlags: 0
@@ -15040,6 +15090,7 @@ Transform:
   - {fileID: 7722081098793574539}
   - {fileID: 708755507}
   - {fileID: 5941454705484950723}
+  - {fileID: 542016987674358015}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15252,7 +15303,7 @@ MonoBehaviour:
   ceilingCollisionProperty: 
   frontWallCollisionProperty: 
   backWallCollisionProperty: 
-  jumpComponent: {fileID: 2350041723857734773}
+  jumpComponent: {fileID: 0}
   jumpTrigger: Jumped
 --- !u!82 &2016050838553766829
 AudioSource:
@@ -15390,9 +15441,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4675779504720407367}
-  - component: {fileID: 2350041723857734773}
+  - component: {fileID: 8403929893662698024}
   m_Layer: 0
-  m_Name: Jump Motor
+  m_Name: Force Acceptor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15412,7 +15463,7 @@ Transform:
   m_Father: {fileID: 5941454705484950723}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2350041723857734773
+--- !u!114 &8403929893662698024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15421,44 +15472,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7101365599856250356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d050b81d0a5ee47b30f49570c5e207, type: 3}
+  m_Script: {fileID: 11500000, guid: 0015c946d93ad934581004a245610bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 3.2
-  timeToPeak: 0.45
-  fallGravityMultiplier: 1.5
-  jumpEndReduceSpeedTo: 0.4
-  coyoteTime: 0.1
-  onJumped:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2112472779}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Play
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  onJumpedIntentionally:
-    m_PersistentCalls:
-      m_Calls: []
-  onJumpedInvoluntarily:
-    m_PersistentCalls:
-      m_Calls: []
-  onReleaseJump:
-    m_PersistentCalls:
-      m_Calls: []
-  collisions: {fileID: 4526770514065402733}
-  jumpButton: {fileID: 1878413281395811911}
-  gravityComponent: {fileID: 7601329983835781827}
-  gravityStrength: {fileID: 57175408042339205}
-  storedVelocity: {fileID: 1005503988044021587}
-  slopeCollisions: {fileID: 7604842693557532288}
+  forcesToApply: {fileID: 0}
+  xVelocity: {fileID: 1113215792421582884}
+  yVelocity: {fileID: 1005503988044021587}
 --- !u!1 &8730612324058914011
 GameObject:
   m_ObjectHideFlags: 0
