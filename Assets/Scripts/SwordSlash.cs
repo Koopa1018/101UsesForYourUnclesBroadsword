@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
+using UnityEngine.Events;
 
 using Clouds.Platformer.Forces;
 
@@ -12,6 +15,7 @@ public class SwordSlash : MonoBehaviour
 	[SerializeField] string actionMapName = "Gameplay";
 	[SerializeField] InputActionReference mouseAction;
 	[SerializeField] InputActionReference attackAction;
+	[SerializeField] InputActionReference abortAction;
 
 	[Header("Fields")]
     public AcceptsForces forceAcceptor;
@@ -20,51 +24,110 @@ public class SwordSlash : MonoBehaviour
     public float feetOffset = 0.75f;
     public LayerMask layerMask;
 
+	[Header("Out Events")] 
+	public Clouds.PlayerInput.InputGetter playerInput;
+
 	[Header("Animator")]
+	public Transform swordTransform;
 	public Animator swordAnimator;
-    
-    bool attack = false;
+
+	bool isReadyToThrow = false;
 
 	void Start () {
 		//Necessary new-input-system init[ialization].
 		inputMap.FindActionMap(actionMapName, true).Enable();
 
+		//Register functions to run on input events.
+		attackAction.action.started += Slash;
+		attackAction.action.performed += HoldToThrow;
+		attackAction.action.canceled += ReleaseThrow;
 		
+		abortAction.action.performed += EndThrow;
 	}
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Vector3 offsetOrigin = player.position + Vector3.up * feetOffset;
+	Vector3 mousePosition, mousePosNormalized, offsetOrigin = Vector3.zero;
+
+	// FixedUpdate will be used to store mouse location
+	void FixedUpdate () {
+		// spot above the player's position, specifically feetOffset units above
+		offsetOrigin = player.position + Vector3.up * feetOffset;
         
         // mouse location relative to player
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(mouseAction.action.ReadValue<Vector2>());
+        mousePosition = Camera.main.ScreenToWorldPoint(mouseAction.action.ReadValue<Vector2>());
         mousePosition -= offsetOrigin;
         Debug.DrawRay(offsetOrigin, mousePosition);
 
-        // when click create Hitbox
-        if (attackAction.action.ReadValue<float>() > 0) {
-			//animate sword to attack
-			swordAnimator.SetTrigger("Swing");
+		// normalize it to length 1; cache to save overhead from sqrts
+		mousePosNormalized = mousePosition.normalized;
+	}
+	
 
-            RaycastHit2D swordHit = Physics2D.Raycast(
-                offsetOrigin, // origin of the raycast
-                mousePosition.normalized, // direction of the raycast
-                swordLength, // length of the raycast
-                layerMask
-            );
-            Debug.DrawRay(offsetOrigin, Vector3.Normalize(mousePosition) * swordLength, Color.red, 0.5f);
-            
-            // hitbox collision check for object component
-            // check object normal
-            Vector2 collideAngle = swordHit.normal;
-            
-            // amount of force from normal
-            forceAcceptor.AcceptForce(collideAngle);
-            // object responses
+    // Update is called once per frame
+    void Slash(InputAction.CallbackContext context)
+    {
+		// when click create Hitbox
+		RaycastHit2D swordHit = Physics2D.Raycast(
+			offsetOrigin, // origin of the raycast
+			mousePosNormalized, // direction of the raycast
+			swordLength, // length of the raycast
+			layerMask
+		);
+		Debug.DrawRay(offsetOrigin, mousePosNormalized * swordLength, Color.red, 0.025f);
+		
+		// hitbox collision check for object component
+		// check object normal
+		Vector2 collideAngle = swordHit.normal;
+		
+		// amount of force from normal
+		forceAcceptor.AcceptForce(collideAngle);
+		// object responses
 
-            attack = false;
-        }
-    }
+		// animate sword to attack
+		swordAnimator.SetTrigger("Swing");
+		pointDisplayerAtTarget();
+	}
+
+	void pointDisplayerAtTarget () {
+
+		// Face swing direction;
+		Vector2 pos2D = new Vector2(mousePosNormalized.x, mousePosNormalized.y);
+		float swordAngle = Vector2.SignedAngle(Vector2.right, pos2D);
+
+		swordTransform.rotation = Quaternion.AngleAxis(swordAngle, Vector3.forward);
+	}
+
+	void HoldToThrow (InputAction.CallbackContext context) {
+		//Lock player in place.
+		playerInput.enabled = false;
+		//Activate let-go-of-button action.
+		isReadyToThrow = true;
+
+		// visualize ready-to-throw state
+		swordAnimator.SetBool("Ready To Throw", true);
+
+		//Debug.Log("end hold interaction, begin throw.");
+	}
+
+	void EndThrow (InputAction.CallbackContext context) {
+		// We are ready to throw; unsetting that flag should keep ReleaseThrow away from beginning a throw.
+		isReadyToThrow = false;
+		playerInput.enabled = true;
+
+		// visualize throw's end.
+		swordAnimator.SetBool("Ready To Throw", false);		
+	}
+
+	void ReleaseThrow (InputAction.CallbackContext context) {
+		if (isReadyToThrow) {
+			// do throw
+
+			// throw done, let everything back to normal
+			EndThrow(context);
+		}
+
+		// CTJ: If I don't do this, it's going to swing twice per click, which isn't at all correct!
+		swordAnimator.ResetTrigger("Swing");
+	}
+
     
 }

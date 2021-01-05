@@ -14985,6 +14985,7 @@ MonoBehaviour:
   actionMapName: Gameplay
   mouseAction: {fileID: 2174564254288744163, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
   attackAction: {fileID: 690852619627469915, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
+  abortAction: {fileID: 3469277467814034868, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
   forceAcceptor: {fileID: 8403929893662698024}
   swordLength: 1.5
   player: {fileID: 2216682379115894274}
@@ -14992,6 +14993,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 192
+  playerInput: {fileID: 5978674446726102842}
+  swordTransform: {fileID: 3917908885083318986}
   swordAnimator: {fileID: 734741548100616893}
 --- !u!1 &4349888619664719635
 GameObject:
@@ -15382,7 +15385,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f17357d8c11d2fb4b8b38cdc9b1ed818, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -15593,6 +15596,7 @@ MonoBehaviour:
   actionMapName: Gameplay
   walkAction: {fileID: 2808990270087980485, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
   jumpAction: {fileID: 0}
+  invertXInput: 1
   walkOutput: {fileID: 5194349388129417200}
   jumpOutput: {fileID: 1878413281395811911}
 --- !u!114 &5194349388129417200

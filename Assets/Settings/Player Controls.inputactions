@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Abort Click",
+                    "type": "Button",
+                    "id": "88186757-7c92-4eb1-941b-9f2ef115032b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -43,7 +51,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "positive",
                     "id": "99d74074-7519-49ec-b4de-6210e22668a5",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -54,7 +62,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "negative",
                     "id": "efb7495c-da19-49f7-b83f-353aa533ce45",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -76,7 +84,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
+                    "name": "positive",
                     "id": "21221c04-2cc4-4af3-a54f-8e932f1c5e61",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -87,7 +95,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
+                    "name": "negative",
                     "id": "21d2cdc5-e0da-423a-82d6-e72d2734b01a",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
@@ -112,10 +120,21 @@
                     "name": "",
                     "id": "b8b4e303-4d6e-458e-b7ff-f995ab32f44b",
                     "path": "<Mouse>/press",
-                    "interactions": "Hold",
+                    "interactions": "Hold,Press(behavior=1)",
                     "processors": "",
                     "groups": "PC",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a61e101-4000-4586-867d-09f93caffe2c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Abort Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
