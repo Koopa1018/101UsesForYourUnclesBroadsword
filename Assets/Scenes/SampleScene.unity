@@ -130,18 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 499120888191634470, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
-      propertyPath: inputMap
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
-    - target: {fileID: 499120888191634470, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
-      propertyPath: walkAction
-      value: 
-      objectReference: {fileID: 2808990270087980485, guid: 133e5ae2815793942a1ca47cc85a5868, type: 3}
-    - target: {fileID: 499120888191634470, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
-      propertyPath: actionMapName
-      value: Gameplay
-      objectReference: {fileID: 0}
     - target: {fileID: 2216682379115894274, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -190,8 +178,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3114165814510124908, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cad9cc6f98578f040828e5d3cbbd6dd9, type: 3}
 --- !u!1 &519420028
 GameObject:
