@@ -45,7 +45,7 @@ public class SwordSlash : MonoBehaviour
 		abortAction.action.performed += EndThrow;
 	}
 
-	Vector3 mousePosition, mousePosNormalized, offsetOrigin = Vector3.zero;
+	Vector3 mousePosition, offsetOrigin = Vector3.zero;
 
 	// FixedUpdate will be used to store mouse location
 	void FixedUpdate () {
@@ -56,23 +56,22 @@ public class SwordSlash : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mouseAction.action.ReadValue<Vector2>());
         mousePosition -= offsetOrigin;
         Debug.DrawRay(offsetOrigin, mousePosition);
-
-		// normalize it to length 1; cache to save overhead from sqrts
-		mousePosNormalized = mousePosition.normalized;
 	}
 	
 
     // Update is called once per frame
     void Slash(InputAction.CallbackContext context)
     {
+		Quaternion swordAngle = getSwordRotation();
+
 		// when click create Hitbox
 		RaycastHit2D swordHit = Physics2D.Raycast(
 			offsetOrigin, // origin of the raycast
-			mousePosNormalized, // direction of the raycast
+			swordAngle * Vector3.right, // direction of the raycast
 			swordLength, // length of the raycast
 			layerMask
 		);
-		Debug.DrawRay(offsetOrigin, mousePosNormalized * swordLength, Color.red, 0.025f);
+		Debug.DrawRay(offsetOrigin, swordAngle * Vector3.right, Color.red, 0.025f);
 		
 		// hitbox collision check for object component
 		// check object normal
@@ -84,16 +83,17 @@ public class SwordSlash : MonoBehaviour
 
 		// animate sword to attack
 		swordAnimator.SetTrigger("Swing");
-		pointDisplayerAtTarget();
+		// point displayer at slash target
+		swordTransform.rotation = swordAngle;
 	}
 
-	void pointDisplayerAtTarget () {
-
-		// Face swing direction;
+	Quaternion getSwordRotation () {
+		// Get angle of swing;
+		Vector3 mousePosNormalized = mousePosition.normalized;
 		Vector2 pos2D = new Vector2(mousePosNormalized.x, mousePosNormalized.y);
 		float swordAngle = Vector2.SignedAngle(Vector2.right, pos2D);
 
-		swordTransform.rotation = Quaternion.AngleAxis(swordAngle, Vector3.forward);
+		return Quaternion.AngleAxis(swordAngle, Vector3.forward);
 	}
 
 	void HoldToThrow (InputAction.CallbackContext context) {
