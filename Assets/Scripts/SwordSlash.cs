@@ -73,18 +73,23 @@ public class SwordSlash : MonoBehaviour
 		);
 		Debug.DrawRay(offsetOrigin, swordAngle * Vector3.right, Color.red, 0.025f);
 		
-		// hitbox collision check for object component
-		// check object normal
-		Vector2 collideAngle = swordHit.normal;
-		
-		// amount of force from normal
-		forceAcceptor.AcceptForce(collideAngle);
-		// object responses
+		if(swordHit)
+		{
+			// hitbox collision check for object component
+			// check object normal
+			Vector2 collideAngle = swordHit.normal;
+			
+			// amount of force from normal
+			forceAcceptor.AcceptForce(collideAngle);
+			// object responses
+			RespondToSwordHit responder = swordHit.collider.GetComponent<RespondToSwordHit>();
+			responder?.Respond();
 
-		// animate sword to attack
-		swordAnimator.SetTrigger("Swing");
-		// point displayer at slash target
-		swordTransform.rotation = swordAngle;
+			// animate sword to attack
+			swordAnimator.SetTrigger("Swing");
+			// point displayer at slash target
+			swordTransform.rotation = swordAngle;
+		}
 	}
 
 	Quaternion getSwordRotation () {
